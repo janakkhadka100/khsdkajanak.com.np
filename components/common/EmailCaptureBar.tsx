@@ -14,8 +14,8 @@ type Props = {
 export function EmailCaptureBar({
   variant = "block",
   nameOptional = true,
-  title = "Stay in the loop",
-  subtitle = "Insights, updates, and platform news. No spam.",
+  title = "Dispatches from the Office of Janak Khadka",
+  subtitle = "Monthly essays, frameworks, and platform updates. No spam.",
   className = "",
 }: Props) {
   const [name, setName] = useState("");

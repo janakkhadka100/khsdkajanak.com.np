@@ -22,7 +22,7 @@ const tools: { id: ToolId; label: string; description: string }[] = [
   },
   {
     id: "caption",
-    label: "Nepali Caption Studio",
+    label: "Caption Desk",
     description:
       "Generate Nepali captions for events, tributes, public posts, and announcements.",
   },
@@ -34,25 +34,25 @@ const tools: { id: ToolId; label: string; description: string }[] = [
   },
   {
     id: "speech",
-    label: "Speech & Program Script",
+    label: "Public Program Desk",
     description:
       "Create stage-ready scripts for programs, events, and public addresses.",
   },
   {
     id: "press",
-    label: "Press Note & Headline",
+    label: "Press Desk",
     description:
       "Write Nepali press notes and news-style announcements for media use.",
   },
   {
     id: "bio",
-    label: "Bio / Profile Writer",
+    label: "Biography Desk",
     description:
       "Create public bios and profiles for artists, organizers, professionals, and candidates.",
   },
   {
     id: "tribute",
-    label: "Tribute / Congratulations / Condolence",
+    label: "Tribute Desk",
     description:
       "Draft sensitive Nepali messages for tributes, congratulations, and condolences.",
   },

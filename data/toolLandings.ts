@@ -15,6 +15,8 @@ export type ToolLandingMeta = {
   toolHref: string;
   relatedSlugs: string[];
   faqs: { question: string; answer: string }[];
+  whoUses?: string[];
+  codexLinks?: { title: string; href: string }[];
 };
 
 export const toolLandingSlugs = [
@@ -34,7 +36,7 @@ export type ToolLandingSlug = (typeof toolLandingSlugs)[number];
 const faqCaption = [
   { question: "Is the caption generator free?", answer: "Yes. The Nepali caption tool on this platform is free to use. Outputs are AI-generated and should be reviewed before posting." },
   { question: "Can I use the captions for business or events?", answer: "Yes. The tool is designed for events, tributes, announcements, and public posts. Always tailor the draft to your context." },
-  { question: "Does it work in Nepali only?", answer: "The tool is optimized for Nepali. You can describe your context in English or Nepali; the generated captions will be in natural Nepali." },
+  { question: "Does it work in Nepali only?", answer: "The tool is tuned for Nepali. You can describe your context in English or Nepali; the generated captions will be in natural Nepali." },
 ];
 
 const faqLetter = [
@@ -112,13 +114,13 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
   },
   "formal-letter-writer": {
     slug: "formal-letter-writer",
-    name: "Nepali Formal Letter Writer",
+    name: "Formal Letter Desk",
     seoTitle: "Nepali Formal Letter Writer – Free AI Draft Tool | Janak Khadka",
     seoDescription: "Draft Nepali formal letters, requests, notices, and invitations for offices and institutions. Free AI tool for Nepal.",
     primaryKeyword: "Nepali formal letter generator",
     secondaryKeywords: ["office letter Nepali", "request letter Nepal", "formal letter draft"],
-    heroTitle: "Nepali Formal Letter Writer",
-    heroSubtitle: "Draft formal Nepali letters for offices, institutions, and public bodies. Request letters, notices, invitations, and clarifications—ready to edit and submit.",
+    heroTitle: "Formal Letter Desk",
+    heroSubtitle: "Draft formal Nepali letters for offices, institutions, and public bodies. Request letters, notices, invitations, and clarifications—structured and ready to edit.",
     whatItDoes: "You choose the letter type (request, recommendation, notice, invitation, clarification), add recipient and subject, and optionally details. The tool produces a structured Nepali draft with placeholders for names and dates.",
     whoItsFor: "Students, job seekers, citizens dealing with offices, and anyone who needs a proper Nepali formal letter without knowing every convention by heart.",
     benefits: [
@@ -133,15 +135,26 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
     toolHref: "/ai-tools#letter",
     relatedSlugs: ["nepali-caption-generator", "speech-script-generator", "press-note-generator"],
     faqs: faqLetter,
+    whoUses: [
+      "Students writing scholarship or leave applications",
+      "Citizens submitting requests to ward or municipality offices",
+      "Teachers and staff preparing official notices",
+      "NGO workers communicating with government partners",
+      "Community leaders documenting local decisions",
+    ],
+    codexLinks: [
+      { title: "Language of Nepali formal letters", href: "/blog/language-of-nepali-formal-letters" },
+      { title: "Everyday bureaucracy as civic practice", href: "/blog/everyday-bureaucracy-as-civic-practice" },
+    ],
   },
   "speech-script-generator": {
     slug: "speech-script-generator",
-    name: "Speech & Program Script Generator",
+    name: "Public Program Desk",
     seoTitle: "Nepali Speech & Program Script Generator – Free AI Tool | Janak Khadka",
     seoDescription: "Create stage-ready Nepali scripts for programs, events, and public addresses. Free AI speech writer for Nepal.",
     primaryKeyword: "Nepali speech writer",
     secondaryKeywords: ["program script Nepal", "event speech Nepali", "stage script generator"],
-    heroTitle: "Speech & Program Script Generator",
+    heroTitle: "Public Program Desk",
     heroSubtitle: "Generate stage-ready Nepali scripts for programs, inaugurations, award functions, and public addresses. Describe your event; get a structured script to edit and deliver.",
     whatItDoes: "You enter the event type, audience, and optional duration or key points. The tool returns a structured script in Nepali with opening, main content, and closing—suitable for reading or adapting on stage.",
     whoItsFor: "Students, teachers, emcees, community leaders, and anyone who has to speak at an event and wants a strong first draft in Nepali.",
@@ -157,15 +170,26 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
     toolHref: "/ai-tools#speech",
     relatedSlugs: ["formal-letter-writer", "tribute-writer", "press-note-generator"],
     faqs: faqSpeech,
+    whoUses: [
+      "School and college event organizers",
+      "Emcees and hosts for public programs",
+      "Teachers preparing formal remarks",
+      "Community leaders speaking at local events",
+      "Youth clubs running ceremonies and awards",
+    ],
+    codexLinks: [
+      { title: "Speech structure in public programs", href: "/blog/speech-structure-in-public-programs" },
+      { title: "Voice, tempo, and respect on stage", href: "/blog/voice-and-respect-on-stage" },
+    ],
   },
   "press-note-generator": {
     slug: "press-note-generator",
-    name: "Press Note & Headline Generator",
+    name: "Press Desk",
     seoTitle: "Nepali Press Note & Headline Generator – Free AI Tool | Janak Khadka",
     seoDescription: "Write Nepali press notes and news-style announcements for media and organizations. Free AI tool for Nepal.",
     primaryKeyword: "Nepali press release generator",
     secondaryKeywords: ["press note Nepal", "news announcement Nepali", "media release"],
-    heroTitle: "Press Note & Headline Generator",
+    heroTitle: "Press Desk",
     heroSubtitle: "Draft Nepali press notes and news-style announcements for events, campaigns, and organizations. Headline, lead, and body in one place.",
     whatItDoes: "You provide the type of announcement, organization name, and key details. The tool generates a headline, short lead, and body paragraphs in formal-but-readable Nepali for media or public distribution.",
     whoItsFor: "PR teams, event organizers, NGOs, and anyone who needs a clear press release or public announcement in Nepali.",
@@ -181,15 +205,26 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
     toolHref: "/ai-tools#press",
     relatedSlugs: ["speech-script-generator", "formal-letter-writer", "bio-writer"],
     faqs: faqPress,
+    whoUses: [
+      "Local organizations announcing programs",
+      "NGO and campaign communication teams",
+      "Festival and event committees",
+      "College unions and youth networks",
+      "Community media and radio programs",
+    ],
+    codexLinks: [
+      { title: "Press narrative frameworks", href: "/blog/press-narrative-frameworks" },
+      { title: "Announcing programs without noise", href: "/blog/announcing-programs-without-noise" },
+    ],
   },
   "bio-writer": {
     slug: "bio-writer",
-    name: "Bio & Profile Writer",
+    name: "Biography Desk",
     seoTitle: "Nepali Bio & Profile Writer – Free AI Tool | Janak Khadka",
     seoDescription: "Generate Nepali bios and profiles for artists, organizers, and public figures. Free AI profile writer for Nepal.",
     primaryKeyword: "Nepali profile writer",
     secondaryKeywords: ["bio generator Nepal", "artist profile Nepali", "public figure bio"],
-    heroTitle: "Bio & Profile Writer",
+    heroTitle: "Biography Desk",
     heroSubtitle: "Create clear, professional Nepali bios and profiles for artists, organizers, candidates, and public figures. Short or long—you choose.",
     whatItDoes: "You share the person’s name (optional), role, and context or achievements. The tool produces a short, medium, or detailed bio in Nepali, plus a social-media-friendly version.",
     whoItsFor: "Artists, community organizers, professionals, and candidates who need a polished Nepali profile for events, websites, or introductions.",
@@ -205,15 +240,26 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
     toolHref: "/ai-tools#bio",
     relatedSlugs: ["tribute-writer", "press-note-generator", "project-proposal-helper"],
     faqs: faqBio,
+    whoUses: [
+      "Artists preparing festival or gallery bios",
+      "Panelists and speakers sending profiles",
+      "Candidates introducing themselves to communities",
+      "Organizers writing about collaborators",
+      "Students applying for programs and residencies",
+    ],
+    codexLinks: [
+      { title: "Writing public biographies in Nepali", href: "/blog/writing-public-biographies-in-nepali" },
+      { title: "Profiles as small civic narratives", href: "/blog/profiles-as-small-civic-narratives" },
+    ],
   },
   "tribute-writer": {
     slug: "tribute-writer",
-    name: "Tribute & Condolence Writer",
+    name: "Tribute Desk",
     seoTitle: "Nepali Tribute, Congratulations & Condolence Writer – Free AI | Janak Khadka",
     seoDescription: "Draft sensitive Nepali messages for tributes, congratulations, and condolences. Free AI tool for the Nepali public.",
     primaryKeyword: "Nepali condolence message writer",
     secondaryKeywords: ["tribute message Nepal", "congratulations Nepali", "condolence caption"],
-    heroTitle: "Tribute, Congratulations & Condolence Writer",
+    heroTitle: "Tribute Desk",
     heroSubtitle: "Draft dignified Nepali messages for tributes, congratulations, and condolences. Share the occasion and context; receive 2–3 options to use or adapt.",
     whatItDoes: "You describe the occasion (condolence, congratulations, tribute to a mentor, thank-you) and optionally the relationship and tone. The tool returns 2–3 message options in sensitive, respectful Nepali.",
     whoItsFor: "Anyone who needs a thoughtful Nepali message for a difficult or joyful moment—without sounding generic or unsure.",
@@ -229,6 +275,17 @@ export const toolLandings: Record<ToolLandingSlug, ToolLandingMeta> = {
     toolHref: "/ai-tools#tribute",
     relatedSlugs: ["nepali-caption-generator", "speech-script-generator", "bio-writer"],
     faqs: faqTribute,
+    whoUses: [
+      "Students and alumni writing to teachers and elders",
+      "Families preparing public condolence messages",
+      "Organizers thanking supporters and partners",
+      "Institutions offering congratulations or recognition",
+      "Community groups marking losses and milestones",
+    ],
+    codexLinks: [
+      { title: "Language of tribute and condolence", href: "/blog/language-of-tribute-and-condolence" },
+      { title: "Public emotion in Nepali writing", href: "/blog/public-emotion-in-nepali-writing" },
+    ],
   },
   "project-proposal-helper": {
     slug: "project-proposal-helper",

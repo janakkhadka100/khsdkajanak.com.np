@@ -1,7 +1,7 @@
 export const aboutIntro = {
   title: "A filmmaker, strategist, writer, and public thinker from Nepal.",
   body: [
-    "Janak Khadka moves between film sets, media studios, writing desks, and public spaces with one intention: to tell serious stories and build useful platforms for Nepal.",
+    "Janak Khadka moves between film sets, broadcast spaces, writing desks, and public rooms with one intention: to tell serious stories and build useful platforms for Nepal.",
     "His work cuts across cinema, journalism, social work, astrology, and emerging AI tools — not as separate careers, but as one ecosystem that serves public imagination and everyday needs.",
   ],
 };

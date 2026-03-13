@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { EmailCaptureBar } from "@/components/common/EmailCaptureBar";
 import { MembershipCtaLink } from "@/components/membership/MembershipCtaLink";
 
@@ -97,8 +96,8 @@ export default function MembershipPage() {
         <div className="mt-10 max-w-xl">
           <EmailCaptureBar
             variant="block"
-            title="Membership & updates"
-            subtitle="Early access and platform news. No spam."
+            title="Dispatches from the Office of Janak Khadka"
+            subtitle="Monthly essays, frameworks, and platform updates. No spam."
           />
         </div>
       </section>

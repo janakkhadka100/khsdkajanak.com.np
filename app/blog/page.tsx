@@ -78,8 +78,8 @@ export default function BlogIndexPage() {
         <div className="mt-10 max-w-xl">
           <EmailCaptureBar
             variant="block"
-            title="Get new articles in your inbox"
-            subtitle="One email when we publish. Unsubscribe anytime."
+            title="Dispatches from the Office of Janak Khadka"
+            subtitle="Monthly essays, frameworks, and platform updates. No spam."
           />
         </div>
       </section>

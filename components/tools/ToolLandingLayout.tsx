@@ -139,6 +139,29 @@ export function ToolLandingLayout({ meta, pageSlug }: Props) {
         </dl>
       </section>
 
+      {/* Related Codex nodes (if any) */}
+      {meta.codexLinks && meta.codexLinks.length > 0 && (
+        <section className="section-shell">
+          <h2 className="text-sm font-semibold uppercase tracking-[0.2em] text-zinc-400">
+            Related Codex nodes
+          </h2>
+          <p className="mt-2 text-xs text-zinc-500">
+            Essays and notes from the Digital Codex that sit behind this desk.
+          </p>
+          <div className="mt-4 grid gap-3 md:grid-cols-3">
+            {meta.codexLinks.map((node) => (
+              <Link
+                key={node.href}
+                href={node.href}
+                className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-sm text-zinc-200 transition hover:border-[#f5b048]/50 hover:bg-white/[0.06]"
+              >
+                <p className="font-medium text-zinc-50">{node.title}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* CTA + Related */}
       <section className="section-shell border-b-0">
         <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 md:p-8">

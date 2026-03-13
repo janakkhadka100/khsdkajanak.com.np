@@ -26,18 +26,28 @@ export function GlowButton(props: GlowButtonProps) {
       ? "btn-primary"
       : "btn-secondary";
 
-  const Element = "href" in props ? Link : motion.button;
-  const elementProps: any =
-    "href" in props
-      ? { href: props.href }
-      : { type: "button", onClick: props.onClick };
+  const isLink = "href" in props;
 
   if (shouldReduceMotion) {
-    const StaticElement = "href" in props ? Link : "button";
+    if (isLink) {
+      const href = (props as { href: string }).href;
+      return (
+        <Link
+          href={href}
+          className={`${baseClasses} ${className ?? ""}`}
+        >
+          {children}
+        </Link>
+      );
+    }
     return (
-      <StaticElement className={`${baseClasses} ${className ?? ""}`} {...elementProps}>
+      <button
+        type="button"
+        onClick={props.onClick}
+        className={`${baseClasses} ${className ?? ""}`}
+      >
         {children}
-      </StaticElement>
+      </button>
     );
   }
 
@@ -48,9 +58,22 @@ export function GlowButton(props: GlowButtonProps) {
       transition={{ type: "spring", stiffness: 260, damping: 24 }}
       className={className}
     >
-      <Element className={baseClasses} {...elementProps}>
-        {children}
-      </Element>
+      {isLink ? (
+        <Link
+          href={(props as { href: string }).href}
+          className={baseClasses}
+        >
+          {children}
+        </Link>
+      ) : (
+        <motion.button
+          type="button"
+          onClick={props.onClick}
+          className={baseClasses}
+        >
+          {children}
+        </motion.button>
+      )}
     </motion.div>
   );
 }

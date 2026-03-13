@@ -70,9 +70,9 @@ body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(circle at 0% -20%, rgba(245, 176, 72, 0.2), transparent 55%),
-    radial-gradient(circle at 80% 0%, rgba(62, 72, 120, 0.3), transparent 60%),
-    radial-gradient(circle at 50% 110%, rgba(0, 0, 0, 0.95), #050509);
+    radial-gradient(circle at 0% -20%, rgba(245, 176, 72, 0.16), transparent 52%),
+    radial-gradient(circle at 80% -10%, rgba(80, 92, 150, 0.26), transparent 58%),
+    radial-gradient(circle at 50% 110%, rgba(0, 0, 0, 0.96), #0b0b0f);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", sans-serif;
@@ -116,8 +116,8 @@ body {
   width: 480px;
   height: 480px;
   border-radius: 999px;
-  filter: blur(60px);
-  opacity: 0.22;
+  filter: blur(48px);
+  opacity: 0.16;
   pointer-events: none;
   z-index: -1;
 }
@@ -148,17 +148,17 @@ body {
 
 .card-elevated {
   border-radius: var(--radius-xl);
-  background: radial-gradient(circle at top left, rgba(245, 179, 72, 0.12), transparent 55%),
-    linear-gradient(to bottom right, rgba(255, 255, 255, 0.02), rgba(6, 6, 10, 0.95));
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: var(--shadow-soft);
-  backdrop-filter: blur(22px);
+  background: radial-gradient(circle at top left, rgba(245, 179, 72, 0.08), transparent 55%),
+    linear-gradient(to bottom right, rgba(20, 20, 28, 0.98), rgba(5, 5, 12, 0.98));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(16px);
 }
 
 .card-premium-intel {
   background:
-    radial-gradient(circle at 0% 0%, rgba(245, 179, 72, 0.22), transparent 55%),
-    linear-gradient(145deg, rgba(5, 5, 9, 0.98), rgba(5, 5, 9, 0.9));
+    radial-gradient(circle at 0% 0%, rgba(245, 179, 72, 0.2), transparent 52%),
+    linear-gradient(145deg, rgba(5, 5, 11, 0.99), rgba(5, 5, 11, 0.94));
   border: 1px solid rgba(230, 205, 150, 0.55);
   box-shadow:
     0 26px 80px rgba(0, 0, 0, 0.88),
@@ -167,9 +167,9 @@ body {
 
 .hero-title {
   font-weight: 800;
-  letter-spacing: -0.03em;
-  line-height: 0.95;
-  max-width: 17ch;
+  letter-spacing: -0.02em;
+  line-height: 0.94;
+  max-width: 16ch;
 }
 
 .hero-subtitle {
@@ -181,6 +181,11 @@ body {
 .hero-body {
   font-size: 0.9rem;
   line-height: 1.7;
+}
+
+.manifesto-text {
+  font-family: var(--font-serif), var(--font-geist-sans), system-ui, -apple-system,
+    BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
 }
 
 .btn-primary {
@@ -195,9 +200,28 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.18em;
-  background-image: linear-gradient(135deg, #f5b048, #f2c387);
+  background-image: linear-gradient(140deg, #f7b84a, #f2c387);
   color: #050509;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.9),
+    0 16px 46px rgba(0, 0, 0, 0.9),
+    0 0 22px rgba(245, 184, 74, 0.18);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: radial-gradient(circle at 10% 0%, rgba(255, 255, 255, 0.32), transparent 55%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.btn-primary:hover::before {
+  opacity: 1;
 }
 
 .btn-secondary {
@@ -211,7 +235,7 @@ body {
   font-size: 0.8rem;
   font-weight: 500;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
+  letter-spacing: 0.16em;
   border: 1px solid rgba(255, 255, 255, 0.3);
   background-color: rgba(12, 12, 18, 0.7);
   color: rgba(245, 243, 235, 0.9);

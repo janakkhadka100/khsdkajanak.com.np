@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { GlowButton } from "@/components/common/GlowButton";
 import { HoverLiftCard } from "@/components/motion/HoverLiftCard";
@@ -18,8 +17,8 @@ export function HeroSection() {
           <motion.div
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10"
-            initial={{ opacity: 0.7 }}
-            animate={{ opacity: [0.7, 0.9, 0.7] }}
+            initial={{ opacity: 0.65 }}
+            animate={{ opacity: [0.65, 0.9, 0.65] }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
             style={{
               background:
@@ -28,7 +27,7 @@ export function HeroSection() {
           />
         )}
 
-        <div className="grid gap-10 md:grid-cols-[minmax(0,2.05fr)_minmax(0,1.35fr)] md:items-end">
+        <div className="grid gap-10 md:grid-cols-[minmax(0,2.2fr)_minmax(0,1.2fr)] md:items-end">
           {/* Left column */}
           <div className="space-y-9">
             <div className="pill w-max bg-white/5 text-[0.7rem] text-zinc-100">
@@ -38,17 +37,16 @@ export function HeroSection() {
 
             <div className="space-y-5">
               <div className="space-y-3">
-                <h1 className="hero-title text-balance text-4xl md:text-5xl lg:text-6xl">
+                <h1 className="hero-title text-balance text-4xl md:text-5xl lg:text-[3.9rem]">
                   Janak Khadka
                 </h1>
                 <p className="hero-subtitle max-w-xl text-zinc-400">
-                  Filmmaker · Strategist · Writer · Public Thinker
+                  Director · Civic Strategist · Cultural Architect
                 </p>
               </div>
-              <p className="hero-body max-w-2xl text-zinc-300 md:text-base">
-                Building creative, cultural, media, and AI-powered public platforms for Nepal — a
-                cinematic headquarters where stories, strategy, and public tools live in one
-                ecosystem.
+              <p className="hero-body max-w-2xl text-zinc-200 md:text-base">
+                Janak Khadka is a cultural architect working at the intersection of cinema, public
+                discourse, and digital systems shaping modern Nepal.
               </p>
             </div>
 
@@ -57,15 +55,15 @@ export function HeroSection() {
                 <span>Explore the Ecosystem</span>
                 <span aria-hidden>↗</span>
               </GlowButton>
-              <GlowButton href="/ai-tools" variant="secondary">
-                Talk to Janak AI
+              <GlowButton href="/contact" variant="secondary">
+                Advisory & Collaborations
               </GlowButton>
             </div>
           </div>
 
           {/* Right column card */}
           <motion.div style={{ y: cardY }}>
-            <HoverLiftCard className="card-elevated card-premium-intel relative overflow-hidden px-6 py-6 md:px-8 md:py-8">
+            <HoverLiftCard className="card-elevated card-premium-intel relative overflow-hidden px-5 py-5 md:px-7 md:py-7">
               {/* Glow orb behind content */}
               {!shouldReduceMotion && (
                 <motion.div
@@ -87,8 +85,7 @@ export function HeroSection() {
                     At a glance
                   </p>
                   <p className="text-sm text-zinc-200">
-                    A single public desk where film, media, ideas, and AI tools are shaped for
-                    Nepal’s everyday audience.
+                    A focused public desk for film, media, ideas, and AI tools in Nepal.
                   </p>
                 </div>
 

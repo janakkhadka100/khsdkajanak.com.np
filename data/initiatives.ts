@@ -22,7 +22,7 @@ export const initiatives: Initiative[] = [
     id: "public-voice-circles",
     title: "Public Voice Circles",
     summary:
-      "Small, recurring gatherings that prototype new kinds of public conversation formats away from the studio lights.",
+      "Small, recurring gatherings that prototype new kinds of public conversation formats away from the television lights.",
     status: "ongoing",
     category: "social",
   },

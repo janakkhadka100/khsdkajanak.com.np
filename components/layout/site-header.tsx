@@ -34,7 +34,7 @@ export function SiteHeader() {
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-6 text-xs font-medium uppercase tracking-[0.18em] text-zinc-400 md:flex">
+        <nav className="hidden items-center gap-6 text-xs font-medium uppercase tracking-[0.16em] text-zinc-300 md:flex">
           {navItems.map((item) => {
             const isActive =
               item.href === "/"

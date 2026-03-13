@@ -7,6 +7,8 @@ import { StatsRow } from "@/components/common/stats-row";
 import { TestimonialCard } from "@/components/common/testimonial-card";
 import { LogoStrip } from "@/components/common/logo-strip";
 import { EmailCaptureBar } from "@/components/common/EmailCaptureBar";
+import { HeroSection } from "@/components/home/HeroSection";
+import { SectionReveal } from "@/components/motion/SectionReveal";
 
 const brandPillars = [
   "Film & Creative Leadership",
@@ -119,91 +121,10 @@ export default function Home() {
 
   return (
     <div className="page-shell space-y-16 pb-24 pt-10 md:space-y-20 md:pt-16">
-      {/* Hero */}
-      <section className="section-shell border-b border-white/10 pb-12 pt-4 md:pb-16">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,2.1fr)_minmax(0,1.3fr)] md:items-end">
-          <div className="space-y-8">
-            <div className="pill w-max bg-white/5 text-[0.7rem] text-zinc-100">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#f5b048]" />
-              Public Ecosystem · Nepal
-            </div>
-
-            <div className="space-y-4">
-              <h1 className="text-balance text-4xl font-semibold tracking-tight md:text-5xl lg:text-6xl">
-                Janak Khadka
-              </h1>
-              <p className="max-w-xl text-sm uppercase tracking-[0.25em] text-zinc-400">
-                Filmmaker · Strategist · Writer · Public Thinker
-              </p>
-              <p className="max-w-2xl text-sm leading-relaxed text-zinc-300 md:text-base">
-                Building creative, cultural, media, and AI-powered public
-                platforms for Nepal — a cinematic headquarters where stories,
-                strategy, and public tools live in one ecosystem.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/projects"
-                className="inline-flex items-center justify-center rounded-full bg-[#f5b048] px-6 py-2.5 text-sm font-semibold text-black shadow-[0_18px_60px_rgba(0,0,0,0.85)] transition hover:bg-[#ffbe55]"
-              >
-                Explore the Ecosystem
-              </Link>
-              <Link
-                href="/ai-tools"
-                className="inline-flex items-center justify-center rounded-full border border-white/18 bg-white/5 px-6 py-2.5 text-sm font-medium text-zinc-100 backdrop-blur-md transition hover:border-[#f5b048]/60 hover:bg-white/10"
-              >
-                Talk to Janak AI
-              </Link>
-            </div>
-          </div>
-
-          <div className="card-elevated relative overflow-hidden px-6 py-6 md:px-8 md:py-8">
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(245,176,72,0.14),transparent_55%)]" />
-            <div className="relative flex h-full flex-col justify-between gap-6">
-              <div className="space-y-3">
-                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
-                  At a glance
-                </p>
-                <p className="text-sm text-zinc-200">
-                  Film direction, media, strategy, social work, astrology, and
-                  AI platforms — held together by one motive:{" "}
-                  <span className="text-zinc-50">
-                    to build serious, public-facing infrastructure for Nepal’s
-                    imagination.
-                  </span>
-                </p>
-              </div>
-
-              <div className="grid grid-cols-3 gap-4 text-xs text-zinc-300">
-                <div>
-                  <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
-                    Domains
-                  </p>
-                  <p className="mt-1 text-sm text-zinc-100">Film · Media · AI</p>
-                </div>
-                <div>
-                  <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
-                    Focus
-                  </p>
-                  <p className="mt-1 text-sm text-zinc-100">
-                    Public tools & stories
-                  </p>
-                </div>
-                <div>
-                  <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
-                    Based in
-                  </p>
-                  <p className="mt-1 text-sm text-zinc-100">Nepal</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* Trust: notable appearances & impact */}
-      <section className="section-shell">
+      <SectionReveal className="section-shell">
         <div className="mb-6 space-y-4">
           <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
             Public trust & footprint
@@ -249,10 +170,10 @@ export default function Home() {
             <StatsRow items={impactHighlights} />
           </div>
         </div>
-      </section>
+      </SectionReveal>
 
       {/* Brand positioning strip */}
-      <section className="section-shell border-none pt-0">
+      <SectionReveal className="section-shell border-none pt-0">
         <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pt-1 text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400 md:justify-between md:overflow-visible">
           {brandPillars.map((pillar) => (
             <div
@@ -263,7 +184,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-      </section>
+      </SectionReveal>
 
       {/* Signature introduction */}
       <section className="section-shell">

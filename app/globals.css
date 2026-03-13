@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Global design tokens */
 :root {
   /* Core neutral palette: cinematic dark */
   --background: #050509;
@@ -21,6 +22,16 @@
   --page-max-width: 1120px;
   --page-horizontal-padding: 1.5rem;
   --page-vertical-padding: 4rem;
+
+  /* Hero & lighting */
+  --hero-gradient-from: #151321;
+  --hero-gradient-to: #050509;
+  --hero-glow-gold: rgba(245, 176, 72, 0.45);
+  --page-vignette-color: rgba(0, 0, 0, 0.75);
+
+  /* Motion-friendly hover tokens */
+  --hover-scale-card: 1.02;
+  --hover-shadow-card: 0 22px 70px rgba(0, 0, 0, 0.8);
 }
 
 @theme inline {
@@ -58,11 +69,69 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background: radial-gradient(circle at top, #171520 0, #050509 52%);
+  background:
+    radial-gradient(circle at 0% -20%, rgba(245, 176, 72, 0.2), transparent 55%),
+    radial-gradient(circle at 80% 0%, rgba(62, 72, 120, 0.3), transparent 60%),
+    radial-gradient(circle at 50% 110%, rgba(0, 0, 0, 0.95), #050509);
   color: var(--foreground);
   font-family: var(--font-geist-sans), system-ui, -apple-system, BlinkMacSystemFont,
     "SF Pro Text", "Segoe UI", sans-serif;
   text-rendering: geometricPrecision;
+}
+
+.with-film-grain,
+.with-vignette {
+  position: relative;
+  isolation: isolate;
+}
+
+.with-film-grain::before,
+.with-vignette::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.with-film-grain::before {
+  opacity: 0.05;
+  mix-blend-mode: soft-light;
+  background-image: url("/noise.png");
+  background-size: 220px 220px;
+}
+
+.with-vignette::after {
+  background: radial-gradient(
+    circle at center,
+    transparent 40%,
+    var(--page-vignette-color) 100%
+  );
+}
+
+.lighting-blobs::before,
+.lighting-blobs::after {
+  content: "";
+  position: fixed;
+  width: 480px;
+  height: 480px;
+  border-radius: 999px;
+  filter: blur(60px);
+  opacity: 0.22;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.lighting-blobs::before {
+  top: -120px;
+  right: -80px;
+  background: radial-gradient(circle at center, rgba(245, 176, 72, 0.75), transparent);
+}
+
+.lighting-blobs::after {
+  bottom: -160px;
+  left: -120px;
+  background: radial-gradient(circle at center, rgba(46, 196, 166, 0.6), transparent);
 }
 
 .page-shell {
@@ -84,6 +153,90 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(22px);
+}
+
+.card-premium-intel {
+  background:
+    radial-gradient(circle at 0% 0%, rgba(245, 179, 72, 0.22), transparent 55%),
+    linear-gradient(145deg, rgba(5, 5, 9, 0.98), rgba(5, 5, 9, 0.9));
+  border: 1px solid rgba(230, 205, 150, 0.55);
+  box-shadow:
+    0 26px 80px rgba(0, 0, 0, 0.88),
+    0 0 0 1px rgba(245, 179, 72, 0.18);
+}
+
+.hero-title {
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 0.95;
+  max-width: 17ch;
+}
+
+.hero-subtitle {
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+.hero-body {
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding-inline: 1.5rem;
+  padding-block: 0.7rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  background-image: linear-gradient(135deg, #f5b048, #f2c387);
+  color: #050509;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  padding-inline: 1.4rem;
+  padding-block: 0.68rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  background-color: rgba(12, 12, 18, 0.7);
+  color: rgba(245, 243, 235, 0.9);
+}
+
+.nav-link {
+  position: relative;
+  padding-block: 0.15rem;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.3rem;
+  height: 1px;
+  width: 100%;
+  transform-origin: center;
+  transform: scaleX(0);
+  background: linear-gradient(to right, transparent, rgba(245, 179, 72, 0.9), transparent);
+  transition: transform 180ms ease-out;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
 }
 
 .pill {

@@ -45,7 +45,7 @@ export function SiteHeader() {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`relative transition-colors hover:text-foreground ${
+                className={`nav-link transition-colors hover:text-foreground ${
                   isActive ? "text-foreground" : ""
                 }`}
               >

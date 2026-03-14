@@ -8,8 +8,10 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 import { HeroSection } from "@/components/home/HeroSection";
+import { MediaCarousel } from "@/components/home/MediaCarousel";
 import { NewsCard } from "@/components/news/NewsCard";
 import { SectionReveal } from "@/components/motion/SectionReveal";
+import { carouselSlides } from "@/data/carousel";
 import { EmailCaptureBar } from "@/components/common/EmailCaptureBar";
 
 const frameworkPillars = [
@@ -188,6 +190,9 @@ export default function Home() {
           </p>
         </div>
       </SectionReveal>
+
+      {/* 2b. Public Record & Media Discourse carousel */}
+      <MediaCarousel slides={carouselSlides} />
 
       {/* 3. Three pillars – core framework */}
       <SectionReveal className="section-shell" delay={0.05}>

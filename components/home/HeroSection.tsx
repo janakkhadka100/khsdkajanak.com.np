@@ -1,13 +1,18 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { GlowButton } from "@/components/common/GlowButton";
 import { HoverLiftCard } from "@/components/motion/HoverLiftCard";
+import { assets } from "@/lib/assets";
 
 export function HeroSection() {
+  const [heroImageError, setHeroImageError] = useState(false);
   const shouldReduceMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const cardY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 12]);
+  const showHeroImage = !heroImageError;
 
   return (
     <section className="section-shell border-b border-gray-200 pb-14 pt-10 md:pb-20 md:pt-16">
@@ -53,8 +58,21 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right column card */}
-          <motion.div style={{ y: cardY }}>
+          {/* Right column: portrait or card */}
+          <motion.div style={{ y: cardY }} className="flex flex-col gap-6">
+            {showHeroImage && (
+              <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl border border-gray-200 shadow-md">
+                <Image
+                  src={assets.heroPortrait}
+                  alt="Janak Khadka — Filmmaker, strategist, writer, Nepal"
+                  fill
+                  priority
+                  sizes="(max-width: 768px) 100vw, 384px"
+                  className="object-cover"
+                  onError={() => setHeroImageError(true)}
+                />
+              </div>
+            )}
             <HoverLiftCard className="card-elevated card-premium-intel relative overflow-hidden px-5 py-5 md:px-7 md:py-7">
               <div className="relative flex h-full flex-col justify-between gap-6">
                 <div className="space-y-3">

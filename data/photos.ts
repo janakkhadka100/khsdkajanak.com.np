@@ -1,56 +1,75 @@
 /**
- * Photo archive - seed from media + projects. Import-ready.
- * Add entries to photoArchive array; structure supports future bulk import.
- * event/source reference real media appearances and projects.
+ * Photo archive - uses public/images/janak-khadka/gallery/
+ * Add more entries to galleryItems; same PhotoArchiveItem shape.
  */
 
-import { mediaItems } from "./media";
+import { assets } from "@/lib/assets";
 import type { PhotoArchiveItem } from "./types";
 
-/** Placeholder image until real assets are added. Replace with /images/... or CDN. */
-const PLACEHOLDER = "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&q=80";
+const GALLERY = assets.gallery;
 
-/**
- * Seed photos from media appearances. Each references a media item.
- * Add more by pushing to photoArchive; same shape, no component changes.
- */
-function seedFromMedia(): PhotoArchiveItem[] {
-  const featured = mediaItems.filter((m) => m.featured);
-  return featured.map((m, i) => {
-    const year = m.date.slice(0, 4);
-    return {
-      id: `media-${m.id}`,
-      imageUrl: m.image ?? PLACEHOLDER,
-      caption: `${m.title} — ${m.outlet}`,
-      source: m.outlet,
-      year,
-      event: m.title,
-      alt: `${m.title}, ${m.outlet}, ${year}`,
-      featured: true,
-      tags: [m.type, "nepal"],
-    };
-  });
-}
-
-/** Additional curated photos (events, projects). Extend array to add more. */
-const curatedPhotos: PhotoArchiveItem[] = [
+/** Media-mapped photos: event filenames linked to known appearances */
+const mediaMappedPhotos: PhotoArchiveItem[] = [
   {
-    id: "community-screening",
-    imageUrl: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80",
-    caption: "Community Screenings & Conversations",
-    source: "Local Cultural Center",
-    year: "2023",
-    event: "Community screenings",
-    alt: "Community screening event, Nepal",
-    featured: false,
-    tags: ["event", "community", "film"],
+    id: "media-festival-conversation",
+    imageUrl: `${GALLERY}/event-2025-11-12.jpg`,
+    caption: "On the Future of Nepali Cinema",
+    source: "Kathmandu Film Forum",
+    year: "2025",
+    event: "Festival conversation",
+    alt: "Janak Khadka at Kathmandu Film Forum, 2025",
+    featured: true,
+    tags: ["panel", "film", "nepal"],
+  },
+  {
+    id: "media-evening-program",
+    imageUrl: `${GALLERY}/event-2025-10-23a.jpg`,
+    caption: "Host, Stories from the Valley",
+    source: "National Television (NTV)",
+    year: "2025",
+    event: "TV program",
+    alt: "Janak Khadka, NTV Stories from the Valley, 2025",
+    featured: true,
+    tags: ["program", "media", "nepal"],
+  },
+  {
+    id: "media-press-ai-tools",
+    imageUrl: `${GALLERY}/event-2026-01-24a.jpg`,
+    caption: "Using AI to Help Nepali Users Write Better",
+    source: "Online News Portal",
+    year: "2026",
+    event: "AI tools coverage",
+    alt: "Janak Khadka, AI tools coverage, 2026",
+    featured: true,
+    tags: ["press", "AI", "nepal"],
   },
 ];
 
-/** All photos. Add items here or via future import — same PhotoArchiveItem shape. */
+/** Gallery photos - add more entries here as you add images */
+const galleryItems: PhotoArchiveItem[] = [
+  { id: "gallery-1", imageUrl: `${GALLERY}/event-2025-10-03.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, October 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-2", imageUrl: `${GALLERY}/event-2025-10-05.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, October 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-3", imageUrl: `${GALLERY}/event-2025-10-21.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, October 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-4", imageUrl: `${GALLERY}/event-2025-10-23b.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, October 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-5", imageUrl: `${GALLERY}/event-2025-11-23a.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, November 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-6", imageUrl: `${GALLERY}/event-2025-11-23b.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, November 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-7", imageUrl: `${GALLERY}/event-2025-11-27a.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, November 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-8", imageUrl: `${GALLERY}/event-2025-11-27b.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, November 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-9", imageUrl: `${GALLERY}/event-2025-12-17.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, December 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-10", imageUrl: `${GALLERY}/event-2025-12-18.jpg`, caption: "Public event", source: "Archive", year: "2025", alt: "Janak Khadka, December 2025", featured: false, tags: ["nepal"] },
+  { id: "gallery-11", imageUrl: `${GALLERY}/event-2025-12-24.jpg`, caption: "Community screenings", source: "Archive", year: "2025", event: "Community screenings", alt: "Janak Khadka, community event December 2025", featured: false, tags: ["event", "community", "nepal"] },
+  { id: "gallery-12", imageUrl: `${GALLERY}/event-2026-01-17.jpg`, caption: "Public event", source: "Archive", year: "2026", alt: "Janak Khadka, January 2026", featured: false, tags: ["nepal"] },
+  { id: "gallery-13", imageUrl: `${GALLERY}/event-2026-01-18.jpg`, caption: "Public event", source: "Archive", year: "2026", alt: "Janak Khadka, January 2026", featured: false, tags: ["nepal"] },
+  { id: "gallery-14", imageUrl: `${GALLERY}/event-2026-01-23.jpg`, caption: "Public event", source: "Archive", year: "2026", alt: "Janak Khadka, January 2026", featured: false, tags: ["nepal"] },
+  { id: "gallery-15", imageUrl: `${GALLERY}/event-2026-01-24b.jpg`, caption: "Public event", source: "Archive", year: "2026", alt: "Janak Khadka, January 2026", featured: false, tags: ["nepal"] },
+  { id: "gallery-16", imageUrl: `${GALLERY}/event-fb-1.jpg`, caption: "Public event", source: "Archive", alt: "Janak Khadka", featured: false, tags: ["nepal"] },
+  { id: "gallery-17", imageUrl: `${GALLERY}/event-fb-2.jpg`, caption: "Public event", source: "Archive", alt: "Janak Khadka", featured: false, tags: ["nepal"] },
+  { id: "gallery-18", imageUrl: `${GALLERY}/event-fb-3.jpg`, caption: "Public event", source: "Archive", alt: "Janak Khadka", featured: false, tags: ["nepal"] },
+];
+
 export const photoArchive: PhotoArchiveItem[] = [
-  ...seedFromMedia(),
-  ...curatedPhotos,
+  ...mediaMappedPhotos,
+  ...galleryItems,
 ];
 
 export function getFeaturedPhotos(): PhotoArchiveItem[] {

@@ -1,8 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { assets } from "@/lib/assets";
 
 const navItems: { href: string; label: string; children?: { href: string; label: string }[] }[] = [
   { href: "/", label: "Ecosystem" },
@@ -36,6 +38,25 @@ const navItems: { href: string; label: string; children?: { href: string; label:
   { href: "/membership", label: "Membership" },
   { href: "/contact", label: "Collaborate" },
 ];
+
+function HeaderLogo() {
+  const [imgError, setImgError] = useState(false);
+  if (imgError) {
+    return <div className="h-8 w-8 shrink-0 rounded-full border-2 border-royal-primary bg-royal-primary" aria-hidden />;
+  }
+  return (
+    <div className="relative h-8 w-8 shrink-0 overflow-hidden rounded-full border-2 border-royal-primary/30">
+      <Image
+        src={assets.profileSquare}
+        alt=""
+        fill
+        sizes="32px"
+        className="object-cover"
+        onError={() => setImgError(true)}
+      />
+    </div>
+  );
+}
 
 function NavLink({
   href,
@@ -176,7 +197,7 @@ export function SiteHeader() {
     >
       <div className="page-shell flex items-center justify-between py-4">
         <Link href="/" className="flex min-h-[44px] min-w-[44px] items-center gap-2" aria-label="Janak Khadka - Home">
-          <div className="h-8 w-8 rounded-full border-2 border-royal-primary bg-royal-primary" aria-hidden />
+          <HeaderLogo />
           <div className="flex flex-col leading-tight">
             <span className="text-xs font-medium uppercase tracking-[0.3em] text-gray-900">
               Janak Khadka

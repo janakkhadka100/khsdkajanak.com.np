@@ -2,112 +2,70 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { GlowButton } from "@/components/common/GlowButton";
-import { HoverLiftCard } from "@/components/motion/HoverLiftCard";
+import Link from "next/link";
+import { motion } from "framer-motion";
 import { assets } from "@/lib/assets";
 
 export function HeroSection() {
   const [heroImageError, setHeroImageError] = useState(false);
-  const shouldReduceMotion = useReducedMotion();
-  const { scrollYProgress } = useScroll();
-  const cardY = useTransform(scrollYProgress, [0, 1], [0, shouldReduceMotion ? 0 : 12]);
-  const showHeroImage = !heroImageError;
+  const showPortrait = !heroImageError;
 
   return (
-    <section className="section-shell border-b border-gray-200 pb-14 pt-10 md:pb-20 md:pt-16">
-      <div className="relative lighting-blobs">
-        <div className="grid gap-10 md:grid-cols-[minmax(0,2.2fr)_minmax(0,1.2fr)] md:items-end">
-          {/* Left column */}
-          <div className="space-y-9">
-            <div className="pill w-max">
-              <span className="h-1.5 w-1.5 rounded-full bg-royal-accent" />
-              Public Ecosystem · Nepal
-            </div>
-
-            <div className="space-y-5">
-              <div className="space-y-3">
-                <h1 className="hero-title text-balance text-4xl md:text-5xl lg:text-[3.9rem]">
-                  Janak Khadka
-                </h1>
-                <p className="hero-subtitle max-w-xl text-gray-700">
-                  Film · Strategy · Civic
-                </p>
-              </div>
-              <p className="hero-body max-w-2xl md:text-base">
-                Building public platforms at the intersection of cinema, civic discourse, and digital
-                systems. Film, media, AI tools, and institutional work rooted in Nepal.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-3">
-              <GlowButton href="/projects" variant="primary">
-                <span>Explore Projects</span>
-                <span aria-hidden>↗</span>
-              </GlowButton>
-              <GlowButton href="/ai-tools" variant="primary">
-                <span>Explore Tools</span>
-                <span aria-hidden>↗</span>
-              </GlowButton>
-              <GlowButton href="/public-desk" variant="secondary">
-                Public Desk
-              </GlowButton>
-              <GlowButton href="/contact" variant="secondary">
-                Collaborate
-              </GlowButton>
-            </div>
+    <section className="relative flex min-h-[90vh] items-center bg-[#0a0a0a]">
+      <div className="page-shell grid w-full grid-cols-1 gap-16 md:grid-cols-[1fr_1fr] md:items-center md:gap-24">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="flex flex-col justify-center"
+        >
+          <p className="font-sans text-sm text-zinc-400">The Office of</p>
+          <h1 className="font-serif mt-2 text-6xl font-normal tracking-tight text-zinc-100 md:text-7xl lg:text-8xl">
+            Janak Khadka
+          </h1>
+          <p className="font-sans mt-6 text-xs font-medium uppercase tracking-[0.35em] text-zinc-400">
+            Director · Media Strategist · Cultural Architect
+          </p>
+          <div className="mt-12 flex flex-col gap-6 sm:flex-row sm:gap-10">
+            <Link
+              href="/projects"
+              className="group inline-flex items-center font-sans text-sm text-zinc-300 transition duration-700 ease-out hover:text-zinc-100"
+            >
+              Explore the Ecosystem
+              <span className="ml-2 opacity-0 transition-all duration-500 group-hover:ml-3 group-hover:opacity-100">
+                →
+              </span>
+            </Link>
+            <Link
+              href="/contact"
+              className="group inline-flex items-center font-sans text-sm text-zinc-300 transition duration-700 ease-out hover:text-zinc-100"
+            >
+              Advisory Inquiries
+              <span className="ml-2 opacity-0 transition-all duration-500 group-hover:ml-3 group-hover:opacity-100">
+                →
+              </span>
+            </Link>
           </div>
+        </motion.div>
 
-          {/* Right column: portrait or card */}
-          <motion.div style={{ y: cardY }} className="flex flex-col gap-6">
-            {showHeroImage && (
-              <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden rounded-xl border border-gray-200 shadow-md">
-                <Image
-                  src={assets.heroPortrait}
-                  alt="Janak Khadka — Filmmaker, strategist, writer, Nepal"
-                  fill
-                  priority
-                  sizes="(max-width: 768px) 100vw, 384px"
-                  className="object-cover"
-                  onError={() => setHeroImageError(true)}
-                />
-              </div>
-            )}
-            <HoverLiftCard className="card-elevated card-premium-intel relative overflow-hidden px-5 py-5 md:px-7 md:py-7">
-              <div className="relative flex h-full flex-col justify-between gap-6">
-                <div className="space-y-3">
-                  <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
-                    At a glance
-                  </p>
-                  <p className="text-sm text-gray-700 leading-relaxed">
-                    A focused public desk for film, media, ideas, and AI tools in Nepal.
-                  </p>
-                </div>
-
-                <div className="grid grid-cols-3 gap-4 text-xs text-gray-700">
-                  <div>
-                    <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
-                      Domains
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-900">Film · Media · AI</p>
-                  </div>
-                  <div>
-                    <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
-                      Focus
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-900">Public tools & stories</p>
-                  </div>
-                  <div>
-                    <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
-                      Based in
-                    </p>
-                    <p className="mt-1 text-sm font-medium text-gray-900">Nepal</p>
-                  </div>
-                </div>
-              </div>
-            </HoverLiftCard>
+        {showPortrait && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
+            className="relative aspect-[4/5] w-full max-w-lg overflow-hidden"
+          >
+            <Image
+              src={assets.heroPortrait}
+              alt="Janak Khadka"
+              fill
+              priority
+              sizes="(max-width: 768px) 100vw, 512px"
+              className="object-cover grayscale"
+              onError={() => setHeroImageError(true)}
+            />
           </motion.div>
-        </div>
+        )}
       </div>
     </section>
   );

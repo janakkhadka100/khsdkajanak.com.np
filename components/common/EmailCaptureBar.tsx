@@ -52,9 +52,9 @@ export function EmailCaptureBar({
 
   if (status === "success") {
     return (
-      <div className={`rounded-2xl border border-white/12 bg-white/[0.03] p-4 text-center text-sm text-zinc-200 ${className}`}>
-        <p className="font-medium text-zinc-50">Thank you.</p>
-        <p className="mt-1 text-xs text-zinc-400">We&apos;ll be in touch.</p>
+      <div className={`rounded-xl border border-gray-200 bg-white p-4 text-center text-sm shadow-sm ${className}`}>
+        <p className="font-medium text-gray-900">Thank you.</p>
+        <p className="mt-1 text-xs text-gray-600">We&apos;ll be in touch.</p>
       </div>
     );
   }
@@ -67,7 +67,7 @@ export function EmailCaptureBar({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="Name (optional)"
-          className="w-full rounded-lg border border-white/12 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500 md:w-40"
+          className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-500 md:w-40"
         />
       )}
       <input
@@ -76,12 +76,12 @@ export function EmailCaptureBar({
         onChange={(e) => setEmail(e.target.value)}
         placeholder="Email"
         required
-        className="w-full rounded-lg border border-white/12 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500 md:w-48"
+        className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-500 md:w-48"
       />
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="shrink-0 rounded-full bg-[#f5b048] px-4 py-2 text-xs font-semibold text-black disabled:opacity-60"
+        className="shrink-0 rounded-lg bg-royal-primary px-4 py-2 text-xs font-semibold text-white disabled:opacity-60 hover:bg-royal-primary-hover"
       >
         {status === "submitting" ? "Sending…" : "Subscribe"}
       </button>
@@ -89,14 +89,14 @@ export function EmailCaptureBar({
   );
 
   return (
-    <div className={`rounded-2xl border border-white/12 bg-white/[0.03] p-4 md:p-5 ${className}`}>
+    <div className={`rounded-xl border border-gray-200 bg-white p-4 shadow-sm md:p-5 ${className}`}>
       {(title || subtitle) && (
         <div className="mb-3">
           {title && (
-            <p className="text-sm font-medium text-zinc-50">{title}</p>
+            <p className="text-sm font-medium text-gray-900">{title}</p>
           )}
           {subtitle && (
-            <p className="mt-0.5 text-xs text-zinc-400">{subtitle}</p>
+            <p className="mt-0.5 text-xs text-gray-600">{subtitle}</p>
           )}
         </div>
       )}
@@ -111,7 +111,7 @@ export function EmailCaptureBar({
         {formContent}
       </form>
       {status === "error" && (
-        <p className="mt-2 text-[0.75rem] text-red-300">{errorMsg}</p>
+        <p className="mt-2 text-[0.75rem] text-red-600">{errorMsg}</p>
       )}
     </div>
   );

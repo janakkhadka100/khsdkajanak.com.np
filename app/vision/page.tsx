@@ -1,16 +1,24 @@
 import { visionIntro, visionSections } from "@/data/vision";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 export default function VisionPage() {
   return (
     <div className="page-shell space-y-16 pb-24 pt-10 md:space-y-20 md:pt-16">
-      <section className="section-shell border-b border-white/10 pb-10 pt-4">
-        <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+      <section className="section-shell border-b border-gray-200 pb-10 pt-4">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Vision & Ideas" },
+          ]}
+          className="mb-4"
+        />
+        <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-9000">
           Vision & Ideas
         </p>
-        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
+        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">
           A vision for Nepal’s creative, media, and AI-powered future.
         </h1>
-        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-300">
+        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-gray-300">
           {visionIntro}
         </p>
       </section>
@@ -20,13 +28,13 @@ export default function VisionPage() {
           <div className="space-y-8">
             {visionSections.map((section) => (
               <article key={section.id} id={section.id} className="space-y-3">
-                <h2 className="text-lg font-semibold text-zinc-50 md:text-xl">
+                <h2 className="text-lg font-semibold text-gray-900 md:text-xl">
                   {section.title}
                 </h2>
                 {section.body.map((paragraph) => (
                   <p
                     key={paragraph}
-                    className="text-sm leading-relaxed text-zinc-300"
+                    className="text-sm leading-relaxed text-gray-300"
                   >
                     {paragraph}
                   </p>
@@ -35,8 +43,8 @@ export default function VisionPage() {
             ))}
           </div>
 
-          <aside className="space-y-4 rounded-3xl border border-white/12 bg-white/[0.03] p-5 text-xs text-zinc-300">
-            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+          <aside className="space-y-4 rounded-3xl border border-gray-200 bg-white shadow-sm p-5 text-xs text-gray-300">
+            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-9000">
               For investors & collaborators
             </p>
             <p>

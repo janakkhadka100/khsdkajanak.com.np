@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 type TemplateType =
   | "application"
@@ -207,28 +208,36 @@ export function NivedanLetterDeskPage() {
 
   return (
     <div className="page-shell space-y-10 pb-24 pt-10 md:space-y-14 md:pt-16">
-      <section className="section-shell border-b border-white/10 pb-10 pt-4 md:pb-14">
+      <section className="section-shell border-b border-gray-2000 pb-10 pt-4 md:pb-14">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Public Desk", href: "/public-desk" },
+            { label: "Nivedan Letter Architect" },
+          ]}
+          className="mb-4"
+        />
         <div className="space-y-4 max-w-3xl">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
             Public Tools · Formal Letters
           </p>
-          <h1 className="text-balance text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
+          <h1 className="text-balance text-2xl font-semibold tracking-tight text-gray-50 md:text-3xl">
             Nivedan &amp; Bureaucratic Letter Architect
           </h1>
-          <p className="text-sm leading-relaxed text-zinc-300 md:text-[0.95rem]">
+          <p className="text-sm leading-relaxed text-gray-300 md:text-[0.95rem]">
             A professional civic writing tool to help you draft clear, respectful, and
             properly structured formal Nepali letters for government offices,
             institutions, and public requests.
           </p>
-          <p className="text-[0.7rem] text-zinc-500">
+          <p className="text-[0.7rem] text-gray-500">
             Output is AI-assisted and should be reviewed before submission. This tool does
             not replace legal advice.
           </p>
-          <div className="mt-4 space-y-1 text-sm text-zinc-300">
-            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+          <div className="mt-4 space-y-1 text-sm text-gray-300">
+            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
               Who uses this desk
             </p>
-            <ul className="mt-1 grid gap-1 text-[0.8rem] text-zinc-300 md:grid-cols-2">
+            <ul className="mt-1 grid gap-1 text-[0.8rem] text-gray-300 md:grid-cols-2">
               <li>• Students</li>
               <li>• Local government staff</li>
               <li>• NGO workers</li>
@@ -244,17 +253,17 @@ export function NivedanLetterDeskPage() {
           {/* Form */}
           <form
             onSubmit={handleGenerate}
-            className="space-y-4 rounded-3xl border border-white/12 bg-white/[0.03] p-5 text-sm text-zinc-100 md:p-6"
+            className="space-y-4 rounded-3xl border border-gray-2000 bg-white/[0.03] p-5 text-sm text-gray-900 md:p-6"
           >
             {/* Context selector */}
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Letter context
               </label>
               <select
                 value={context}
                 onChange={(e) => setContext(e.target.value as ContextType)}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
               >
                 {contextOptions.map((c) => (
                   <option key={c.value} value={c.value}>
@@ -266,7 +275,7 @@ export function NivedanLetterDeskPage() {
 
             {/* Quick start templates */}
             <div className="space-y-1">
-              <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Quick start templates
               </p>
               <div className="flex flex-wrap gap-2">
@@ -281,7 +290,7 @@ export function NivedanLetterDeskPage() {
                       setSubject(qt.subject);
                       setPurpose(qt.purpose);
                     }}
-                    className="rounded-full border border-white/20 bg-white/[0.04] px-3 py-1 text-[0.7rem] font-medium text-zinc-100 hover:border-white/40"
+                    className="rounded-full border border-gray-200 bg-white/[0.04] px-3 py-1 text-[0.7rem] font-medium text-gray-900 hover:border-gray-300"
                   >
                     {qt.label}
                   </button>
@@ -290,13 +299,13 @@ export function NivedanLetterDeskPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Letter template
               </label>
               <select
                 value={template}
                 onChange={(e) => setTemplate(e.target.value as TemplateType)}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
               >
                 {templates.map((t) => (
                   <option key={t.value} value={t.value}>
@@ -308,101 +317,101 @@ export function NivedanLetterDeskPage() {
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Sender name
                 </label>
                 <input
                   value={senderName}
                   onChange={(e) => setSenderName(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="Your name / organization"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Address
                 </label>
                 <input
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="Ward, municipality, district"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Recipient office
               </label>
               <input
                 value={recipientOffice}
                 onChange={(e) => setRecipientOffice(e.target.value)}
                 required
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="जस्तो: वडा कार्यालय, विद्यालय, मन्त्रालय…"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Subject
               </label>
               <input
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
                 required
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="पत्रको विषय"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Purpose / request
               </label>
               <textarea
                 value={purpose}
                 onChange={(e) => setPurpose(e.target.value)}
                 rows={3}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="के माग/निवेदन गर्न लागिएको हो? छोटकरीमा लेख्नुहोस्।"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Supporting details
               </label>
               <textarea
                 value={details}
                 onChange={(e) => setDetails(e.target.value)}
                 rows={3}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="सन्दर्भ, पृष्ठभूमि, सम्बन्धित मिति, पहिल्यै भएका कुराहरू…"
               />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Optional attachments reference
                 </label>
                 <input
                   value={attachments}
                   onChange={(e) => setAttachments(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="जस्तै: नागरिकता प्रतिलिपि, सिफारिस, प्रमाणपत्र…"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Date (optional)
                 </label>
                 <input
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="मिति (यदि उल्लेख गर्न चाहनुहुन्छ भने)"
                 />
               </div>
@@ -426,7 +435,7 @@ export function NivedanLetterDeskPage() {
                 type="button"
                 onClick={handleCopy}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 {copied ? "Copied" : "Copy text"}
               </button>
@@ -434,7 +443,7 @@ export function NivedanLetterDeskPage() {
                 type="button"
                 onClick={handleCopyWithCredit}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 {creditCopied ? "Copied with credit" : "Copy with credit"}
               </button>
@@ -442,7 +451,7 @@ export function NivedanLetterDeskPage() {
                 type="button"
                 onClick={handleDownloadPdf}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 Download PDF
               </button>
@@ -450,24 +459,24 @@ export function NivedanLetterDeskPage() {
           </form>
 
           {/* Output */}
-          <div className="space-y-4 rounded-3xl border border-white/12 bg-black/40 p-5 text-sm text-zinc-100 md:p-6">
+          <div className="space-y-4 rounded-3xl border border-gray-2000 bg-gray-50 p-5 text-sm text-gray-900 md:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
                   Generated letter
                 </p>
-                <p className="mt-1 text-xs text-zinc-400">
+                <p className="mt-1 text-xs text-gray-400">
                   Structured in formal Nepali with subject, body, and closing.
                 </p>
               </div>
             </div>
-            <div className="min-h-[260px] rounded-2xl border border-white/10 bg-black/60 p-4 text-sm leading-relaxed text-zinc-100">
+            <div className="min-h-[260px] rounded-2xl border border-gray-2000 bg-gray-100 p-4 text-sm leading-relaxed text-gray-900">
               {output ? (
-                <pre className="whitespace-pre-wrap font-sans text-sm text-zinc-100">
+                <pre className="whitespace-pre-wrap font-sans text-sm text-gray-900">
                   {output}
                 </pre>
               ) : (
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-gray-500">
                   Fill the fields on the left and select a template to generate a formal
                   Nepali letter. The architect will include subject, opening line, body,
                   formal closing, and placeholders for signature and date.
@@ -476,8 +485,8 @@ export function NivedanLetterDeskPage() {
             </div>
 
             {/* Example block */}
-            <div className="space-y-2 border-t border-white/10 pt-4 text-xs text-zinc-300">
-              <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+            <div className="space-y-2 border-t border-gray-2000 pt-4 text-xs text-gray-300">
+              <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
                 Example scenario
               </p>
               <p>
@@ -485,7 +494,7 @@ export function NivedanLetterDeskPage() {
                 अनुमति मागदैँ निवेदन पत्र लेख्नुपर्ने स्थिति, वा स्थानीय वडा कार्यालयलाई
                 सिफारिस पत्रको लागि अनुरोध गर्ने स्थिति।
               </p>
-              <p className="text-[0.7rem] text-zinc-500">
+              <p className="text-[0.7rem] text-gray-500">
                 यो स्थानमा केही चिनारी मात्र दिइएको हो। वास्तविक पत्रहरू तपाईंको
                 विवरणअनुसार ताजा बनाइनेछन्।
               </p>
@@ -493,11 +502,11 @@ export function NivedanLetterDeskPage() {
                 <button
                   type="button"
                   onClick={handleCopyLink}
-                  className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100"
+                  className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-3 py-1.5 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900"
                 >
                   {linkCopied ? "Link copied" : "Share template link"}
                 </button>
-                <p className="text-[0.65rem] text-zinc-500">
+                <p className="text-[0.65rem] text-gray-500">
                   Optional footer for shared drafts: “Draft prepared via Janak AI Public Desk – JanakKhadka.com”
                 </p>
               </div>
@@ -506,15 +515,15 @@ export function NivedanLetterDeskPage() {
         </div>
       </section>
       <section className="section-shell border-b-0">
-        <div className="space-y-2 text-xs text-zinc-400">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+        <div className="space-y-2 text-xs text-gray-400">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
             Related Codex nodes
           </p>
           <ul className="mt-1 space-y-1">
             <li>
               <Link
                 href="/blog/language-of-nepali-formal-letters"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Language of Nepali Formal Letters
               </Link>
@@ -522,7 +531,7 @@ export function NivedanLetterDeskPage() {
             <li>
               <Link
                 href="/blog/civic-writing-in-public-institutions"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Civic Writing in Public Institutions
               </Link>
@@ -530,7 +539,7 @@ export function NivedanLetterDeskPage() {
             <li>
               <Link
                 href="/blog/respectful-communication-with-government-offices"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Respectful Communication with Government Offices
               </Link>

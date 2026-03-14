@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 type ToneType = "formal" | "warm" | "inspiring";
 
@@ -202,28 +203,36 @@ export function SpeechProgramDeskClientPage() {
 
   return (
     <div className="page-shell space-y-10 pb-24 pt-10 md:space-y-14 md:pt-16">
-      <section className="section-shell border-b border-white/10 pb-10 pt-4 md:pb-14">
+      <section className="section-shell border-b border-gray-2000 pb-10 pt-4 md:pb-14">
+        <Breadcrumbs
+          items={[
+            { label: "Home", href: "/" },
+            { label: "Public Desk", href: "/public-desk" },
+            { label: "Speech & Program Desk" },
+          ]}
+          className="mb-4"
+        />
         <div className="space-y-4 max-w-3xl">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
             Public Tools · Speeches
           </p>
-          <h1 className="text-balance text-2xl font-semibold tracking-tight text-zinc-50 md:text-3xl">
+          <h1 className="text-balance text-2xl font-semibold tracking-tight text-gray-50 md:text-3xl">
             Speech &amp; Program Script Desk
           </h1>
-          <p className="text-sm leading-relaxed text-zinc-300 md:text-[0.95rem]">
+          <p className="text-sm leading-relaxed text-gray-300 md:text-[0.95rem]">
             A civic writing desk for preparing clear, respectful, and well-structured
             speeches, welcome notes, vote-of-thanks messages, and stage scripts for
             public programs in Nepal.
           </p>
-          <p className="text-[0.7rem] text-zinc-500">
+          <p className="text-[0.7rem] text-gray-500">
             Output is AI-assisted and should be reviewed before delivery. This tool does
             not replace institutional or legal guidance.
           </p>
-          <div className="mt-4 space-y-1 text-sm text-zinc-300">
-            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+          <div className="mt-4 space-y-1 text-sm text-gray-300">
+            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
               Who uses this desk
             </p>
-            <ul className="mt-1 grid gap-1 text-[0.8rem] text-zinc-300 md:grid-cols-2">
+            <ul className="mt-1 grid gap-1 text-[0.8rem] text-gray-300 md:grid-cols-2">
               <li>• Teachers and school leaders</li>
               <li>• Local representatives and ward chairs</li>
               <li>• Community organizers and NGOs</li>
@@ -239,11 +248,11 @@ export function SpeechProgramDeskClientPage() {
           {/* Form */}
           <form
             onSubmit={handleGenerate}
-            className="space-y-4 rounded-3xl border border-white/12 bg-white/[0.03] p-5 text-sm text-zinc-100 md:p-6"
+            className="space-y-4 rounded-3xl border border-gray-200 bg-white shadow-sm p-5 text-sm text-gray-900 md:p-6"
           >
             {/* Quick start templates */}
             <div className="space-y-1">
-              <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <p className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Quick start templates
               </p>
               <div className="flex flex-wrap gap-2">
@@ -260,7 +269,7 @@ export function SpeechProgramDeskClientPage() {
                       setTone(qt.tone);
                       setLength(qt.length);
                     }}
-                    className="rounded-full border border-white/20 bg-white/[0.04] px-3 py-1 text-[0.7rem] font-medium text-zinc-100 hover:border-white/40"
+                    className="rounded-full border border-gray-200 bg-gray-50 px-3 py-1 text-[0.7rem] font-medium text-gray-900 hover:border-gray-300"
                   >
                     {qt.label}
                   </button>
@@ -269,76 +278,76 @@ export function SpeechProgramDeskClientPage() {
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Program type
               </label>
               <input
                 value={programType}
                 onChange={(e) => setProgramType(e.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="जस्तै: विद्यालय वार्षिक कार्यक्रम, उद्घाटन, सम्मान कार्यक्रम…"
               />
             </div>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Speaker role
                 </label>
                 <input
                   value={speakerRole}
                   onChange={(e) => setSpeakerRole(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="जस्तै: कार्यक्रम संयोजक, वडा अध्यक्ष, प्रधानाध्यापक…"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Audience type
                 </label>
                 <input
                   value={audienceType}
                   onChange={(e) => setAudienceType(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="जस्तै: विद्यार्थी, अभिभावक, समुदायका बासिन्दा…"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Occasion / theme
               </label>
               <input
                 value={occasion}
                 onChange={(e) => setOccasion(e.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="जस्तै: शिक्षक दिवस, युवा नेतृत्व कार्यक्रम, सार्वजनिक भेला…"
               />
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Key points to mention
               </label>
               <textarea
                 value={keyPoints}
                 onChange={(e) => setKeyPoints(e.target.value)}
                 rows={3}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="सम्बोधनमा समावेश गर्नुपर्ने मुख्य बुँदाहरू, उदाहरण, सन्देशहरू…"
               />
             </div>
 
             <div className="grid gap-4 md:grid-cols-3">
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Tone
                 </label>
                 <select
                   value={tone}
                   onChange={(e) => setTone(e.target.value as ToneType)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 >
                   {toneOptions.map((t) => (
                     <option key={t.value} value={t.value}>
@@ -348,37 +357,37 @@ export function SpeechProgramDeskClientPage() {
                 </select>
               </div>
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Length
                 </label>
                 <input
                   value={length}
                   onChange={(e) => setLength(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="जस्तै: ३–५ मिनेट, ५–७ मिनेट…"
                 />
               </div>
               <div className="space-y-1">
-                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+                <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                   Optional date / venue
                 </label>
                 <input
                   value={dateVenue}
                   onChange={(e) => setDateVenue(e.target.value)}
-                  className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                  className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                   placeholder="जस्तै: मिति, स्थान, हलको नाम…"
                 />
               </div>
             </div>
 
             <div className="space-y-1">
-              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-zinc-400">
+              <label className="text-[0.7rem] font-medium uppercase tracking-[0.22em] text-gray-400">
                 Optional names / institutions / chief guest
               </label>
               <input
                 value={names}
                 onChange={(e) => setNames(e.target.value)}
-                className="w-full rounded-lg border border-white/15 bg-black/30 px-3 py-2 text-sm text-zinc-100 outline-none"
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
                 placeholder="जस्तै: मुख्य अतिथि, सह–आयोजक संस्था, विशेष पाहुना…"
               />
             </div>
@@ -401,7 +410,7 @@ export function SpeechProgramDeskClientPage() {
                 type="button"
                 onClick={handleCopy}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 {copied ? "Copied" : "Copy text"}
               </button>
@@ -409,7 +418,7 @@ export function SpeechProgramDeskClientPage() {
                 type="button"
                 onClick={handleCopyWithCredit}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 {creditCopied ? "Copied with credit" : "Copy with credit"}
               </button>
@@ -417,7 +426,7 @@ export function SpeechProgramDeskClientPage() {
                 type="button"
                 onClick={handleDownloadPdf}
                 disabled={!output}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-zinc-100 disabled:opacity-40"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-4 py-2 text-[0.7rem] font-medium uppercase tracking-[0.18em] text-gray-900 disabled:opacity-40"
               >
                 Download PDF
               </button>
@@ -425,13 +434,13 @@ export function SpeechProgramDeskClientPage() {
           </form>
 
           {/* Output */}
-          <div className="space-y-4 rounded-3xl border border-white/12 bg-black/40 p-5 text-sm text-zinc-100 md:p-6">
+          <div className="space-y-4 rounded-3xl border border-gray-2000 bg-gray-50 p-5 text-sm text-gray-900 md:p-6">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
                   Generated script
                 </p>
-                <p className="mt-1 text-xs text-zinc-400">
+                <p className="mt-1 text-xs text-gray-400">
                   Structured with greeting, body, closing, and optional stage cues where
                   relevant.
                 </p>
@@ -439,18 +448,18 @@ export function SpeechProgramDeskClientPage() {
               <button
                 type="button"
                 onClick={handleCopyLink}
-                className="inline-flex items-center justify-center rounded-full border border-white/20 bg-white/5 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-zinc-100"
+                className="inline-flex items-center justify-center rounded-full border border-gray-200 bg-white/5 px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.18em] text-gray-900"
               >
                 {linkCopied ? "Link copied" : "Share template link"}
               </button>
             </div>
-            <div className="min-h-[260px] rounded-2xl border border-white/10 bg-black/60 p-4 text-sm leading-relaxed text-zinc-100">
+            <div className="min-h-[260px] rounded-2xl border border-gray-2000 bg-gray-100 p-4 text-sm leading-relaxed text-gray-900">
               {output ? (
-                <pre className="whitespace-pre-wrap font-sans text-sm text-zinc-100">
+                <pre className="whitespace-pre-wrap font-sans text-sm text-gray-900">
                   {output}
                 </pre>
               ) : (
-                <p className="text-xs text-zinc-500">
+                <p className="text-xs text-gray-500">
                   Fill the fields on the left or start with a template to generate a
                   Nepali speech or program script. The desk will include greeting,
                   structured body, respectful closing, and, where useful, light stage cues
@@ -458,8 +467,8 @@ export function SpeechProgramDeskClientPage() {
                 </p>
               )}
             </div>
-            <div className="space-y-2 border-t border-white/10 pt-4 text-xs text-zinc-300">
-              <p className="text-[0.7rem] text-zinc-500">
+            <div className="space-y-2 border-t border-gray-2000 pt-4 text-xs text-gray-300">
+              <p className="text-[0.7rem] text-gray-500">
                 Optional footer for shared drafts: “Draft prepared via Janak AI Public
                 Desk – JanakKhadka.com”
               </p>
@@ -469,15 +478,15 @@ export function SpeechProgramDeskClientPage() {
       </section>
 
       <section className="section-shell border-b-0">
-        <div className="space-y-2 text-xs text-zinc-400">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
+        <div className="space-y-2 text-xs text-gray-400">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-500">
             Related Codex nodes
           </p>
           <ul className="mt-1 space-y-1">
             <li>
               <Link
                 href="/blog/speech-structure-in-public-programs"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Speech Structure in Public Programs
               </Link>
@@ -485,7 +494,7 @@ export function SpeechProgramDeskClientPage() {
             <li>
               <Link
                 href="/blog/voice-and-respect-on-stage"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Voice, Tempo, and Respect on Stage
               </Link>
@@ -493,7 +502,7 @@ export function SpeechProgramDeskClientPage() {
             <li>
               <Link
                 href="/blog/civic-speaking-in-nepali-contexts"
-                className="underline-offset-4 hover:text-zinc-200 hover:underline"
+                className="underline-offset-4 hover:text-royal-primary hover:underline"
               >
                 Civic Speaking in Nepali Contexts
               </Link>

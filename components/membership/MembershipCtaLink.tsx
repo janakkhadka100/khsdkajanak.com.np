@@ -13,13 +13,13 @@ type Props = {
 
 export function MembershipCtaLink({ href, cta, variant = "outline", children, className = "" }: Props) {
   const base =
-    "inline-flex items-center justify-center rounded-full px-5 py-2 text-xs font-medium uppercase tracking-[0.22em] transition";
+    "inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-full px-5 py-2.5 text-xs font-medium uppercase tracking-[0.22em] transition";
   const styles =
     variant === "primary"
-      ? "bg-[#f5b048] text-black shadow-[0_18px_60px_rgba(0,0,0,0.85)] hover:bg-[#ffbe55]"
+      ? "bg-royal-primary text-white shadow-sm hover:bg-royal-primary-hover"
       : variant === "neutral"
-        ? "bg-zinc-50 text-black hover:bg-zinc-100"
-        : "border border-white/18 bg-white/5 text-zinc-200 backdrop-blur-md hover:bg-white/10";
+        ? "bg-gray-100 text-gray-900 hover:bg-gray-200"
+        : "border-2 border-royal-primary text-royal-primary hover:bg-gray-50";
 
   return (
     <Link

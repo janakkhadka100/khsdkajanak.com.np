@@ -12,9 +12,11 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: Params }): Metadata {
   const meta = getToolLandingBySlug(params.slug);
   if (!meta) return { title: "Tool | Janak Khadka" };
+  const title = meta.seoTitle.replace(/\s*\|\s*Janak Khadka\s*$/, "");
   return {
-    title: meta.seoTitle,
+    title,
     description: meta.seoDescription,
+    alternates: { canonical: `/tools/${params.slug}` },
     openGraph: {
       title: meta.seoTitle,
       description: meta.seoDescription,

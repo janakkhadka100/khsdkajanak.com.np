@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { trackEvent } from "@/lib/analytics";
+import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 
 type ToolId =
   | "janak-chat"
@@ -13,109 +15,185 @@ type ToolId =
   | "tribute"
   | "proposal";
 
-const tools: { id: ToolId; label: string; description: string }[] = [
+type ToolMeta = {
+  id: ToolId;
+  label: string;
+  description: string;
+  category: "conversation" | "civic" | "planning";
+  featured?: boolean;
+};
+
+const tools: ToolMeta[] = [
   {
     id: "janak-chat",
-    label: "Janak AI Chat",
+    label: "Ask Janak AI",
     description:
-      "Ask about films, ideas, public messaging, creativity, Nepal, and soft life direction.",
+      "Conversations about films, ideas, public messaging, creativity, and Nepal.",
+    category: "conversation",
+    featured: true,
   },
   {
     id: "caption",
     label: "Caption Desk",
-    description:
-      "Generate Nepali captions for events, tributes, public posts, and announcements.",
+    description: "Nepali captions for events, tributes, posts, and announcements.",
+    category: "civic",
   },
   {
     id: "letter",
     label: "Formal Letter Desk",
-    description:
-      "Draft Nepali formal letters, requests, notices, invitations, and clarifications.",
+    description: "Draft letters for offices, institutions, and civic requests.",
+    category: "civic",
   },
   {
     id: "speech",
-    label: "Public Program Desk",
-    description:
-      "Create stage-ready scripts for programs, events, and public addresses.",
+    label: "Speech & Program Desk",
+    description: "Stage-ready scripts for programs and public addresses.",
+    category: "civic",
   },
   {
     id: "press",
     label: "Press Desk",
-    description:
-      "Write Nepali press notes and news-style announcements for media use.",
+    description: "Press notes and news-style announcements for media use.",
+    category: "civic",
   },
   {
     id: "bio",
     label: "Biography Desk",
-    description:
-      "Create public bios and profiles for artists, organizers, professionals, and candidates.",
+    description: "Public bios for artists, organizers, and public figures.",
+    category: "civic",
   },
   {
     id: "tribute",
     label: "Tribute Desk",
-    description:
-      "Draft sensitive Nepali messages for tributes, congratulations, and condolences.",
+    description: "Dignified tributes, congratulations, and condolences.",
+    category: "civic",
   },
   {
     id: "proposal",
     label: "Project Proposal Helper",
-    description:
-      "Turn rough ideas into structured project or campaign concepts.",
+    description: "Turn ideas into structured project or campaign concepts.",
+    category: "planning",
   },
 ];
+
+const categoryLabels: Record<string, string> = {
+  conversation: "Start here",
+  civic: "Civic writing desks",
+  planning: "Planning & ideas",
+};
 
 export default function AiToolsPage() {
   const [activeTool, setActiveTool] = useState<ToolId>("janak-chat");
 
   return (
     <div className="page-shell space-y-12 pb-24 pt-10 md:space-y-16 md:pt-16">
-      <section className="section-shell border-b border-white/10 pb-8 pt-4">
-        <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-500">
-          AI tools hub
+      <section className="section-shell border-b border-gray-200 pb-10 pt-4 md:pb-12">
+        <Breadcrumbs items={[{ label: "Home", href: "/" }, { label: "AI Tools" }]} className="mb-4" />
+        <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
+          Janak AI Public Desk
         </p>
-        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-zinc-50 md:text-4xl">
-          Practical AI utilities for Nepali public life.
+        <h1 className="mt-3 text-balance text-3xl font-semibold tracking-tight text-gray-900 md:text-4xl">
+          Practical AI tools for Nepali public life.
         </h1>
-        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-zinc-300">
-          These tools are designed for how people in Nepal actually write:
-          letters to offices, program speeches, captions, tributes, and
-          announcements. Every output is AI-assisted and should be reviewed and
-          edited before use.
+        <p className="mt-5 max-w-2xl text-sm leading-relaxed text-gray-700">
+          Civic writing desks and conversation tools for letters, speeches, captions,
+          tributes, and announcements. All outputs are drafting assistants—review and
+          edit before use.
         </p>
-        <p className="mt-3 text-[0.7rem] text-zinc-500">
-          Disclaimer: These tools do not provide legal, medical, or financial
-          advice. They are assistants for drafting language only.
-        </p>
+
+        <div className="mt-6 grid gap-6 sm:grid-cols-2 max-w-3xl">
+          <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-4">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-gray-600">
+              Use cases
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-gray-700">
+              Students writing applications; organizers preparing scripts; citizens
+              drafting ward letters; NGOs announcing programs. For everyday public
+              writing in Nepal.
+            </p>
+          </div>
+          <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-4">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-gray-600">
+              Limitations
+            </p>
+            <p className="mt-2 text-xs leading-relaxed text-gray-700">
+              Not legal, medical, or financial advice. Drafts only—use your judgment.
+              For full-featured letter and speech desks, see the{" "}
+              <Link href="/public-desk" className="text-gray-900 underline underline-offset-2 hover:text-royal-accent">
+                Public Desk
+              </Link>
+              .
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="section-shell border-b-0">
-        <div className="grid gap-6 md:grid-cols-[260px_minmax(0,1fr)]">
-          <aside className="space-y-3 rounded-3xl border border-white/12 bg-white/[0.03] p-3 text-xs text-zinc-200">
-            {tools.map((tool) => (
-              <button
-                key={tool.id}
-                type="button"
-                onClick={() => {
-                trackEvent("tool_opened", { tool_id: tool.id });
-                setActiveTool(tool.id);
+        <div className="grid gap-6 md:grid-cols-[280px_minmax(0,1fr)]">
+          <div className="md:hidden">
+            <label htmlFor="tool-select" className="sr-only">
+              Select tool
+            </label>
+            <select
+              id="tool-select"
+              value={activeTool}
+              onChange={(e) => {
+                const id = e.target.value as ToolId;
+                trackEvent("tool_opened", { tool_id: id });
+                setActiveTool(id);
               }}
-                className={`w-full rounded-2xl border px-3 py-3 text-left transition ${
-                  activeTool === tool.id
-                    ? "border-[#f5b048]/80 bg-white/[0.08]"
-                    : "border-white/10 bg-transparent hover:border-white/30 hover:bg-white/[0.04]"
-                }`}
-              >
-                <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
-                  {tool.label}
-                </p>
-                <p className="mt-1 text-[0.72rem] text-zinc-300">
-                  {tool.description}
-                </p>
-              </button>
-            ))}
+              className="w-full min-h-[44px] rounded-xl border border-gray-200 bg-white px-4 py-3 text-base text-gray-900 outline-none"
+            >
+              {tools.map((t) => (
+                <option key={t.id} value={t.id}>
+                  {t.featured ? `${t.label} (Featured)` : t.label}
+                </option>
+              ))}
+            </select>
+          </div>
+          <aside className="hidden space-y-4 rounded-xl border border-gray-200 bg-white shadow-sm p-4 md:block">
+            {(["conversation", "civic", "planning"] as const).map((cat) => {
+              const catTools = tools.filter((t) => t.category === cat);
+              return (
+                <div key={cat} className="space-y-2">
+                  <p className="text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-gray-600">
+                    {categoryLabels[cat]}
+                  </p>
+                  {catTools.map((tool) => (
+                    <button
+                      key={tool.id}
+                      type="button"
+                      onClick={() => {
+                        trackEvent("tool_opened", { tool_id: tool.id });
+                        setActiveTool(tool.id);
+                      }}
+                      className={`w-full min-h-[44px] rounded-xl border px-3 py-3 text-left transition ${
+                        activeTool === tool.id
+                          ? "border-royal-accent/50 bg-royal-accent/5"
+                          : "border-gray-200 bg-transparent hover:border-gray-300 hover:bg-gray-50"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span className="text-[0.75rem] font-medium text-gray-900">
+                          {tool.label}
+                        </span>
+                        {tool.featured && (
+                          <span className="rounded bg-[#f5b048]/20 px-1.5 py-0.5 text-[0.6rem] font-semibold uppercase tracking-wider text-royal-accent">
+                            Featured
+                          </span>
+                        )}
+                      </span>
+                      <p className="mt-1 text-[0.7rem] leading-snug text-gray-600">
+                        {tool.description}
+                      </p>
+                    </button>
+                  ))}
+                </div>
+              );
+            })}
           </aside>
 
-          <div className="space-y-6">
+          <div className="min-w-0 space-y-6">
             {activeTool === "janak-chat" && <JanakChatPanel />}
             {activeTool === "caption" && <CaptionPanel />}
             {activeTool === "letter" && <LetterPanel />}
@@ -168,17 +246,17 @@ function JanakChatPanel() {
   }
 
   return (
-    <div className="card-elevated relative overflow-hidden p-6 text-sm text-zinc-50 md:p-8">
+    <div className="card-elevated relative overflow-hidden p-6 text-sm text-gray-900 md:p-8">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_rgba(245,176,72,0.16),transparent_55%)]" />
       <div className="relative space-y-4">
         <div>
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-300">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-700">
             Janak AI Chat
           </p>
-          <p className="mt-2 text-sm text-zinc-100">
+          <p className="mt-2 text-sm text-gray-900">
             Ask about films, creative direction, public messaging, strategy for
             Nepal, or soft life questions. Responses are{" "}
-            <span className="font-medium text-zinc-50">
+            <span className="font-medium text-gray-900">
               AI-assisted, not personal advice
             </span>
             .
@@ -190,7 +268,7 @@ function JanakChatPanel() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={4}
-            className="w-full rounded-2xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Write in Nepali or English. Example: ‘मेरो सानो फिल्म परियोजनाको लागि कुन किसिमको कथा संरचना राम्रो हुन्छ?’"
           />
           <button
@@ -206,11 +284,11 @@ function JanakChatPanel() {
           <p className="text-[0.75rem] text-red-300">Error: {error}</p>
         )}
         {reply && (
-          <div className="mt-3 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+          <div className="mt-3 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+            <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
               Response
             </p>
-            <p className="whitespace-pre-line text-sm text-zinc-100">
+            <p className="whitespace-pre-line text-sm text-gray-900">
               {reply}
             </p>
           </div>
@@ -257,47 +335,47 @@ function CaptionPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
         Nepali Caption Studio
       </p>
-      <p className="mt-2 text-sm text-zinc-200">
+      <p className="mt-2 text-sm text-gray-700">
         For Facebook posts, event announcements, tributes, congratulations,
         condolences, and public notes.
       </p>
 
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Post type / context
           </label>
           <input
             value={postType}
             onChange={(e) => setPostType(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Example: फिल्म प्रिमियरको निम्तो, शिक्षकलाई धन्यवाद, कार्यक्रमको फोटो पोस्ट"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Tone (optional)
           </label>
           <input
             value={tone}
             onChange={(e) => setTone(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Example: सम्मानजनक, औपचारिक, आत्मीय, रमाइलो"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Key points (optional)
           </label>
           <textarea
             value={keyPoints}
             onChange={(e) => setKeyPoints(e.target.value)}
             rows={3}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="नाम, स्थान, मिति, विशेष धन्यवाद दिनुपर्ने व्यक्तिहरू..."
           />
         </div>
@@ -314,8 +392,8 @@ function CaptionPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Suggestions
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -363,25 +441,34 @@ function LetterPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
-        Formal Letter Desk
-      </p>
-      <p className="mt-2 text-sm text-zinc-200">
-        For offices, institutions, municipalities, colleges, and public
-        organizations.
-      </p>
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
+            Formal Letter Desk
+          </p>
+          <p className="mt-2 text-sm text-gray-700">
+            For offices, institutions, municipalities, colleges, and public organizations.
+          </p>
+        </div>
+        <Link
+          href="/tools/nivedan-letter-architect"
+          className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-gray-600 underline-offset-2 hover:text-gray-900"
+        >
+          Full desk →
+        </Link>
+      </div>
 
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Letter type
             </label>
             <select
               value={letterType}
               onChange={(e) => setLetterType(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
             >
               <option value="अनुरोध पत्र">अनुरोध पत्र</option>
               <option value="सिफारिस पत्र">सिफारिस पत्र</option>
@@ -392,39 +479,39 @@ function LetterPanel() {
             </select>
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Recipient
             </label>
             <input
               value={recipient}
               onChange={(e) => setRecipient(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="जस्तो: वडा कार्यालय, विद्यालयको प्राचार्य, संस्थाको अध्यक्ष..."
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Subject
           </label>
           <input
             value={subject}
             onChange={(e) => setSubject(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="के विषयमा पत्र लेख्दै हुनुहुन्छ?"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Details (optional)
           </label>
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="तपाईंको प्रसंग, मिति, संख्या, र विशेष जानकारीहरू लेख्नुहोस्।"
           />
         </div>
@@ -442,8 +529,8 @@ function LetterPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Draft
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -491,62 +578,71 @@ function SpeechPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
-        Speech & Program Script
-      </p>
-      <p className="mt-2 text-sm text-zinc-200">
-        For events, school and college programs, award functions, inaugurations,
-        and public addresses.
-      </p>
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div>
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
+            Speech & Program Script
+          </p>
+          <p className="mt-2 text-sm text-gray-700">
+            For events, school and college programs, inaugurations, and public addresses.
+          </p>
+        </div>
+        <Link
+          href="/tools/speech-program-desk"
+          className="text-[0.7rem] font-medium uppercase tracking-[0.16em] text-gray-600 underline-offset-2 hover:text-gray-900"
+        >
+          Full desk →
+        </Link>
+      </div>
 
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Event type
             </label>
             <input
               value={eventType}
               onChange={(e) => setEventType(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="जस्तो: उद्घाटन कार्यक्रम, सम्मान समारोह, विद्यार्थी भेला..."
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Audience
             </label>
             <input
               value={audience}
               onChange={(e) => setAudience(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="जस्तो: विद्यार्थी, कलाकार, समुदायका अगुवा, पत्रकार..."
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Approx. duration (optional)
           </label>
           <input
             value={duration}
             onChange={(e) => setDuration(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="उदाहरण: ३–५ मिनेट"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Key points (optional)
           </label>
           <textarea
             value={keyPoints}
             onChange={(e) => setKeyPoints(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="समावेश गर्नुपर्ने मुख्य सन्देश, व्यक्तिहरू, धन्यवाद..."
           />
         </div>
@@ -564,8 +660,8 @@ function SpeechPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Draft
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -618,11 +714,11 @@ function PressPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
         Press Note & Headline
       </p>
-      <p className="mt-2 text-sm text-zinc-200">
+      <p className="mt-2 text-sm text-gray-700">
         For organizations, events, campaigns, and announcements that need media
         clarity.
       </p>
@@ -630,50 +726,50 @@ function PressPanel() {
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Announcement type
             </label>
             <input
               value={announcementType}
               onChange={(e) => setAnnouncementType(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="जस्तो: नयाँ कार्यक्रम, फिल्म प्रदर्शन, पुरस्कार घोषणा..."
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Organization / team
             </label>
             <input
               value={organization}
               onChange={(e) => setOrganization(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="सम्बन्धित संस्था, टिम वा समूह"
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Headline idea (optional)
           </label>
           <input
             value={headlineIdea}
             onChange={(e) => setHeadlineIdea(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="कस्तो हेडलाइन मन परेको छ? छैन भने खाली राख्नुस्।"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Key details (optional)
           </label>
           <textarea
             value={keyDetails}
             onChange={(e) => setKeyDetails(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="के, कहिले, कहाँ, को-को, किन? मुख्य बुँदाहरू लेख्नुस्।"
           />
         </div>
@@ -691,8 +787,8 @@ function PressPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Draft
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -740,55 +836,55 @@ function BioWriterPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
         Bio / Profile Writer
       </p>
-      <p className="mt-2 text-sm text-zinc-200">
+      <p className="mt-2 text-sm text-gray-700">
         For artists, organizers, candidates, and public figures who need a clear
         Nepali profile.
       </p>
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Name (optional)
             </label>
             <input
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="Name of the person"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Role / identity (optional)
             </label>
             <input
               value={role}
               onChange={(e) => setRole(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="Example: filmmaker, community organizer, candidate..."
             />
           </div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Context / achievements
           </label>
           <textarea
             value={context}
             onChange={(e) => setContext(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Write key points: work, experience, values, and what this person is known for."
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Length
           </label>
           <select
@@ -796,7 +892,7 @@ function BioWriterPanel() {
             onChange={(e) =>
               setLength(e.target.value as "short" | "medium" | "long")
             }
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none"
           >
             <option value="short">Short bio</option>
             <option value="medium">Medium bio</option>
@@ -817,8 +913,8 @@ function BioWriterPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Draft
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -866,59 +962,59 @@ function TributePanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
         Tribute / Congratulations / Condolence
       </p>
-      <p className="mt-2 text-sm text-zinc-200">
+      <p className="mt-2 text-sm text-gray-700">
         For sensitive posts, event speeches, and program notes that must feel
         dignified.
       </p>
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Occasion
           </label>
           <input
             value={occasion}
             onChange={(e) => setOccasion(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Example: condolence for a community elder, congratulations for award, tribute to mentor..."
           />
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Relationship (optional)
             </label>
             <input
               value={relationship}
               onChange={(e) => setRelationship(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="Example: student, colleague, family friend..."
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Tone (optional)
             </label>
             <input
               value={tone}
               onChange={(e) => setTone(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="Example: very gentle, grateful, formal..."
             />
           </div>
         </div>
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Details (optional)
           </label>
           <textarea
             value={details}
             onChange={(e) => setDetails(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Names, contributions, event details, or personal memories you want to highlight."
           />
         </div>
@@ -935,8 +1031,8 @@ function TributePanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Suggestions
           </p>
           <p className="whitespace-pre-line">{result}</p>
@@ -984,58 +1080,58 @@ function ProposalPanel() {
   }
 
   return (
-    <div className="rounded-3xl border border-white/15 bg-white/[0.03] p-6 text-sm text-zinc-50 md:p-8">
-      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+    <div className="rounded-xl border border-gray-200 bg-white shadow-sm p-6 text-sm text-gray-900 md:p-8">
+      <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
         Project Proposal Helper
       </p>
-      <p className="mt-2 text-sm text-zinc-200">
+      <p className="mt-2 text-sm text-gray-700">
         For campaigns, programs, and initiatives that need a clear, structured
         concept note.
       </p>
       <form onSubmit={handleGenerate} className="mt-4 space-y-3">
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Working title (optional)
           </label>
           <input
             value={ideaTitle}
             onChange={(e) => setIdeaTitle(e.target.value)}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Example: Community Film & Conversation Series"
           />
         </div>
         <div className="space-y-2">
-          <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+          <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
             Background / context
           </label>
           <textarea
             value={context}
             onChange={(e) => setContext(e.target.value)}
             rows={4}
-            className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+            className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
             placeholder="Describe the idea, where it comes from, and why it matters."
           />
         </div>
         <div className="grid gap-3 md:grid-cols-2">
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Main goal (optional)
             </label>
             <input
               value={goal}
               onChange={(e) => setGoal(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="What change/result are you aiming for?"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs uppercase tracking-[0.18em] text-zinc-400">
+            <label className="text-xs uppercase tracking-[0.18em] text-gray-600">
               Audience / beneficiaries (optional)
             </label>
             <input
               value={audience}
               onChange={(e) => setAudience(e.target.value)}
-              className="w-full rounded-xl border border-white/15 bg-black/40 px-3 py-2 text-sm text-zinc-50 outline-none placeholder:text-zinc-500"
+              className="w-full rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-900 outline-none placeholder:text-gray-600"
               placeholder="Who is this for?"
             />
           </div>
@@ -1053,8 +1149,8 @@ function ProposalPanel() {
         <p className="mt-3 text-[0.75rem] text-red-300">Error: {error}</p>
       )}
       {result && (
-        <div className="mt-4 space-y-2 rounded-2xl border border-white/12 bg-black/40 p-4 text-sm text-zinc-100">
-          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-zinc-400">
+        <div className="mt-4 space-y-2 rounded-xl border border-gray-200 bg-white p-4 text-sm text-gray-900">
+          <p className="text-[0.7rem] uppercase tracking-[0.22em] text-gray-600">
             Draft
           </p>
           <p className="whitespace-pre-line">{result}</p>
